@@ -50,10 +50,6 @@
 % Mathematics
 \usepackage{latex-sty/basicmathcommands}
 \usepackage{latex-sty/framedtheorems}
-\usepackage{latex-sty/topologycommands}
-\usepackage{latex-sty/probabilitycommands}
-\usepackage{tikz-cd}
-\usetikzlibrary{babel}
 
 % Lists
 \usepackage{enumitem}
@@ -103,7 +99,39 @@
 
 \maketitle
 
-\addtocounter{chapter}{3}
+
+\addtocounter{chapter}{2}
+\chapter{Momentum and Angular Momentum}
+
+\addtocounter{section}{2}
+\section{The Centre of Mass}
+
+\begin{remarkbreak}[The centre of mass and convexity]
+    Consider collections of particles at positions $\vec{r}_{11}, \ldots, \vec{r}_{1k}$ and $\vec{r}_{21}, \ldots, \vec{r}_{2l}$, with masses $m_{11}, \ldots, m_{1k}$ and $m_{21}, \ldots, m_{2l}$, respectively. Let $M_1 = \sum_{i=1}^k m_{1i}$ and $M_2 = \sum_{j=1}^l m_{2j}$ be the total masses of the two collections of particles, and let
+    %
+    \begin{equation*}
+        \vec{R}_1
+            = \frac{1}{M_1} \sum_{i=1}^k m_{1i} \vec{r}_{1i}
+        \quad \text{and} \quad
+        \vec{R}_2
+            = \frac{1}{M_2} \sum_{j=1}^l m_{2j} \vec{r}_{2j}
+    \end{equation*}
+    %
+    be their centres of mass. The centre of mass of the whole system is then
+    %
+    \begin{align*}
+        \vec{R}
+            &= \frac{1}{M_1 + M_2} \biggl( \sum_{i=1}^k m_{1i} \vec{r}_{1i} + \sum_{j=1}^l m_{2j} \vec{r}_{2j} \biggr) \\
+            &= \frac{1}{M_1 + M_2} \biggl( \frac{M_1}{M_1} \sum_{i=1}^k m_{1i} \vec{r}_{1i} + \frac{M_2}{M_2} \sum_{j=1}^l m_{2j} \vec{r}_{2j} \biggr) \\
+            &= \frac{M_1 \vec{R}_1 + M_2 \vec{R}_2}{M_1 + M_2}.
+    \end{align*}
+    %
+    This obviously extends to any finite number of collections of particles.
+
+    In particular, it follows that the centre of mass of a finite collection of particles lies in the convex hull of their position vectors. For the above shows that $\vec{R}$ is a convex combination of $\vec{R}_1$ and $\vec{R}_2$, so this follows by induction on the number of particles. In fact, this holds for any weighted average (with non-negative weights) of points in any dimension.
+\end{remarkbreak}
+
+
 \chapter{Energy}
 
 \addtocounter{section}{8}

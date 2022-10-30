@@ -132,6 +132,84 @@
 \end{remarkbreak}
 
 
+\section{Ang}
+
+[TODO]
+
+\section{Angular Momentum for Several Particles}
+
+\newcommand{\CM}{\mathrm{CM}}
+
+\begin{remarkbreak}[König's theorem for angular momenta]
+    For $i = 1, \ldots, n$ consider a particle with mass $m_i$ and position vector $\vec{r}_i$ with respect to an origin $O$ at rest in an inertial frame. Furthermore, let $\vec{p}_i$ be its momentum. If $\vec{R}$ is the centre of mass of all $n$ particles, then we let $\vec{r}_i' = \vec{r} - \vec{R}$ be the relative position of the $i$th particle, and let $\vec{p}_i' = m_i \dot{\vec{r}}_i'$. Denote by $M$ the total mass of the particles, and let $\vec{P}$ be the total momentum (equivalently $\vec{P} = M \dot{\vec{R}}$). The angular momentum of the $i$th particle with respect to the centre of mass is then
+    %
+    \begin{align*}
+        \vec{l}_i'
+            &= \vec{r}_i' \prod \vec{p}_i'
+             = (\vec{r}_i - \vec{R}) \prod (\vec{p}_i - m_i \dot{\vec{R}}) \\
+            &= \vec{l}_i - m_i \vec{r}_i \prod \dot{\vec{R}} - \vec{R} \prod \vec{p}_i + m_i \vec{R} \prod \dot{\vec{R}}.
+    \end{align*}
+    %
+    Therefore, the total angular momentum with respect to the centre of mass is
+    %
+    \begin{align*}
+        \vec{L}'
+            &= \sum_{i=1}^n \vec{l}_i'
+             = \vec{L} - M \vec{R} \prod \dot{\vec{R}} - \vec{R} \prod \vec{P} + M \vec{R} \prod \dot{\vec{R}} \\
+            &= \vec{L} - \vec{R} \prod \vec{P}
+             = \vec{L} - \vec{L}_\CM,
+    \end{align*}
+    %
+    where $\vec{L}_\CM = \vec{R} \prod \vec{P}$ is the angular momentum of the centre of mass. Hence
+    %
+    \begin{equation*}
+        \vec{L} = \vec{L}' + \vec{L}_\CM,
+    \end{equation*}
+    %
+    which is \emph{König's theorem} for angular momenta.
+\end{remarkbreak}
+
+
+\begin{remarkbreak}[Decomposition of torque]
+    Next let each particle $i$ be acted upon by an external force $\vec{F}_i$, and let $\vec{F}$ be the total force on the system. If the total external torque relative to the origin $O$ is $\vec{\Gamma}$, then the external torque relative to the centre of mass is
+    %
+    \begin{align*}
+        \vec{\Gamma}'
+            &= \sum_{i=1}^n \vec{r}_i' \prod \vec{F}_i
+             = \sum_{i=1}^n (\vec{r}_i - \vec{R}) \prod \vec{F}_i \\
+            &= \sum_{i=1}^n \vec{\Gamma}_i - \vec{R} \prod \vec{F}
+             = \vec{\Gamma} - \vec{\Gamma}_\CM,
+    \end{align*}
+    %
+    where $\vec{\Gamma}_\CM = \vec{R} \prod \vec{F}$ is the torque on the centre of mass. That is,
+    %
+    \begin{equation*}
+        \vec{\Gamma}
+            = \vec{\Gamma}' + \vec{\Gamma}_\CM.
+    \end{equation*}
+    %
+    Now notice that 
+    %
+    \begin{equation*}
+        \dot{\vec{L}}_\CM
+            = (\dot{\vec{R}} \prod \vec{P}) + (\vec{R} \prod \dot{\vec{P}})
+            = \vec{R} \prod \vec{F}
+            = \vec{\Gamma}_\CM,
+    \end{equation*}
+    %
+    since $\dot{\vec{R}}$ and $\vec{P} = M\dot{\vec{R}}$ are parallel. König's theorem thus implies that
+    %
+    \begin{equation*}
+        \dot{\vec{L}}'
+            = \dot{\vec{L}} - \dot{\vec{L}}_\CM
+            = \vec{\Gamma} - \vec{\Gamma}_\CM
+            = \vec{\Gamma}'.
+    \end{equation*}
+    %
+    That is, relative to the centre of mass, the external torque is the time derivative of the angular momentum, even if the centre of mass frame is not inertial.
+\end{remarkbreak}
+
+
 \chapter{Energy}
 
 \addtocounter{section}{8}

@@ -212,8 +212,32 @@
 
 \chapter{Energy}
 
-\addtocounter{section}{8}
+\section{Kinetic Energy and Work}
 
+\begin{remarkbreak}[König's theorem for kinetic energy]
+    Notice that
+    %
+    \begin{align*}
+        T
+            &= \frac{1}{2} \sum_{i=1}^n m_i v_i^2
+             = \frac{1}{2} \sum_{i=1}^n m_i \norm{\vec{v}_i' + \dot{\vec{R}}}^2 \\
+            &= \frac{1}{2} \sum_{i=1}^n m_i (v_i')^2
+              + \frac{1}{2} \sum_{i=1}^n m_i \dot{R}^2
+              + \dot{\vec{R}} \cdot \sum_{i=1}^n m_i \vec{v}_i'.
+    \end{align*}
+    %
+    But the last term vanishes since $\sum_{i=1}^n m_i \vec{v}_i'$ is the time derivative of $\sum_{i=1}^n m_i \vec{r}_i'$, which is zero. Hence
+    %
+    \begin{equation*}
+        T
+            = T' + T_\CM,
+    \end{equation*}
+    %
+    which is \emph{König's theorem} for kinetic energy.
+\end{remarkbreak}
+
+
+\addtocounter{section}{7}
 \section{Energy of Interaction of Two Particles}
 
 Consider two particles numbered 1 and 2, and let particle $i$ act on particle $j \neq i$ via a force $\vec{F}_{ij}$. We assume that the force depends only on the position of the two particles, and perhaps time. Focusing on $\vec{F}_{12}$ we thus have e.g.\footnote{We use the physicist's notation to describe the domain of functions; the codomain is either $\reals$ or $\reals^3$, and we distinguish these by denoting vector-valued functions with boldface letters, similar to other vector-valued quantities. Thus the notation $\vec{F}_{12} = \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)$ means that $\vec{F}_{12}$ is a function $\Omega \to \reals^3$, where $\Omega \subseteq \reals^3 \prod \reals^3 \prod \reals$ is the set of permitted values of $(\vec{r}_1, \vec{r}_2, t)$.} $\vec{F}_{12} = \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)$. Assuming that the two particles are isolated, we have

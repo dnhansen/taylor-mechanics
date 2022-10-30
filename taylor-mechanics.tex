@@ -1,0 +1,148 @@
+% Document setup
+\documentclass[article, a4paper, 11pt, oneside]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[UKenglish]{babel}
+
+% Document info
+\newcommand\doctitle{Taylor, \emph{Classical Mechanics}}
+\newcommand\docauthor{Danny Nygård Hansen}
+
+% Formatting and layout
+\usepackage[autostyle]{csquotes}
+\usepackage[final]{microtype}
+\usepackage{xcolor}
+\frenchspacing
+\usepackage{latex-sty/articlepagestyle}
+\usepackage{latex-sty/articlesectionstyle}
+
+% Fonts
+\usepackage{amssymb}
+\usepackage[largesmallcaps,partialup]{kpfonts}
+\DeclareSymbolFontAlphabet{\mathrm}{operators} % https://tex.stackexchange.com/questions/40874/kpfonts-siunitx-and-math-alphabets
+\linespread{1.06}
+% \let\mathfrak\undefined
+% \usepackage{eufrak}
+\DeclareMathAlphabet\mathfrak{U}{euf}{m}{n}
+\SetMathAlphabet\mathfrak{bold}{U}{euf}{b}{n}
+% https://tex.stackexchange.com/questions/13815/kpfonts-with-eufrak
+\usepackage{inconsolata}
+
+% Hyperlinks
+\usepackage{hyperref}
+\definecolor{linkcolor}{HTML}{4f4fa3}
+\hypersetup{%
+	pdftitle=\doctitle,
+	pdfauthor=\docauthor,
+	colorlinks,
+	linkcolor=linkcolor,
+	citecolor=linkcolor,
+	urlcolor=linkcolor,
+	bookmarksnumbered=true
+}
+
+% Equation numbering
+\numberwithin{equation}{chapter}
+
+% Footnotes
+\footmarkstyle{\textsuperscript{#1}\hspace{0.25em}}
+
+% Mathematics
+\usepackage{latex-sty/basicmathcommands}
+\usepackage{latex-sty/framedtheorems}
+\usepackage{latex-sty/topologycommands}
+\usepackage{latex-sty/probabilitycommands}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+% Lists
+\usepackage{enumitem}
+\setenumerate[0]{label=\normalfont(\arabic*)}
+
+% Bibliography
+\usepackage[backend=biber, style=authoryear, maxcitenames=2, useprefix]{biblatex}
+\addbibresource{references.bib}
+
+% Title
+\title{\doctitle}
+\author{\docauthor}
+
+\newcommand{\setF}{\mathbb{F}}
+\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\borel}{\mathcal{B}}
+\newcommand{\measurable}{\mathcal{M}}
+\newcommand{\wto}{\Rightarrow}
+\DeclarePairedDelimiter{\net}{\langle}{\rangle}
+\newcommand{\strucS}{\mathfrak{S}}
+\DeclarePairedDelimiter{\gen}{\langle}{\rangle} % Generating set
+\newcommand{\frakL}{\mathfrak{L}}
+
+
+% Physics commands
+
+\DeclarePairedDelimiter{\ket}{\lvert}{\rangle}
+% \renewcommand{\vec}{\mathbf}
+\newcommand{\grad}{\nabla}
+
+
+\begin{document}
+
+\maketitle
+
+\addtocounter{chapter}{3}
+\chapter{Energy}
+
+\addtocounter{section}{8}
+
+\section{Energy of Interaction of Two Particles}
+
+Consider two particles numbered 1 and 2, and let particle $i$ act on particle $j \neq i$ via a force $\vec{F}_{ij}$. We assume that the force depends only on the position of the two particles, and perhaps time. Focusing on $\vec{F}_{12}$ we thus have e.g.\footnote{We use the physicist's notation to describe the domain of functions; the codomain is either $\reals$ or $\reals^3$, and we distinguish these by denoting vector-valued functions with boldface letters, similar to other vector-valued quantities. Thus the notation $\vec{F}_{12} = \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)$ means that $\vec{F}_{12}$ is a function $\Omega \to \reals^3$, where $\Omega \subseteq \reals^3 \prod \reals^3 \prod \reals$ is the set of permitted values of $(\vec{r}_1, \vec{r}_2, t)$.} $\vec{F}_{12} = \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)$. Assuming that the two particles are isolated, we have
+%
+\begin{equation*}
+    \vec{F}_{12}(\vec{r}_1 + \vec{h}, \vec{r}_2 + \vec{h}, t)
+    = \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)
+\end{equation*}
+%
+for all vectors $\vec{h}$, i.e., the force is translation invariant.
+
+Now assume that $\vec{r}_2 = \vec{0}$ at some time\footnote{As far as I can tell, the following arguments do not require that we measure the positions of the particles in an inertial frame, so we may set $\vec{r}_2 = \vec{0}$ at all $t$.} $t$, which we can always accomplish by changing coordinates. Further assume that the force $(\vec{r}_1, t) \mapsto \vec{F}_{12}(\vec{r}_1, \vec{0}, t)$ is derived from a potential $U_t = U_t(\vec{r}_1)$, parametrised by $t$. That is, we require that the line integral of the above force between any two points is independent of path, when we keep $t$ fixed. Next, no longer fix particle 2 at the origin. Since the force is translation invariant, it follows that\footnote{By $\grad U_t(\vec{r}_1 - \vec{r}_2)$ below we mean, seemingly contrary to Taylor, the value of the function $\grad U_t$ at the point $\vec{r}_1 - \vec{r}_2$.}
+%
+\begin{equation*}
+    \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)
+        = \vec{F}_{12}(\vec{r}_1 - \vec{r}_2, t)
+        = -\grad U_t(\vec{r}_1 - \vec{r}_2).
+\end{equation*}
+%
+Next define a new potential $U_{12} = U_{12}(\vec{r}_1, \vec{r}_{2}, t) = U_t(\vec{r}_1 - \vec{r}_2)$. Denoting by $\grad_1$ the gradient operator with respect to the first three arguments, i.e. the three coordinates of $\vec{r}_1$, we thus find that
+%
+\begin{equation*}
+    \vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)
+        = -\grad_1 U_{12}(\vec{r}_1, \vec{r}_2, t).
+\end{equation*}
+%
+We similarly find that
+%
+\begin{equation*}
+    \vec{F}_{21}(\vec{r}_1, \vec{r}_2, t)
+        = -\vec{F}_{12}(\vec{r}_1, \vec{r}_2, t)
+        = \grad_1 U_{12}(\vec{r}_1, \vec{r}_2, t)
+        = -\grad_2 U_{12}(\vec{r}_1, \vec{r}_2, t),
+\end{equation*}
+%
+where the operator $\grad_2$ is defined analogously to $\grad_1$.
+
+\end{document}

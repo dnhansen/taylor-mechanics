@@ -132,9 +132,20 @@
 \end{remarkbreak}
 
 
-\section{Ang}
+\section{Angular Momentum for a Single Particle}
 
-[TODO]
+\begin{remarkbreak}[Angular momentum in noninertial frames]
+    Choose an origin $O$ that is not necessarily at rest in any inertial frame, and consider a particle with mass $m$ and position vector $\vec{r}$ relative to $O$. The angular momentum of the particle relative to $O$ is then, by definition, $\vec{l} = \vec{r} \prod \vec{p}$. Its time derivative is
+    %
+    \begin{equation*}
+        \dot{\vec{l}}
+            = \dot{\vec{r}} \prod \vec{p} + \vec{r} \prod \dot{\vec{p}}
+            = \vec{r} \prod \dot{\vec{p}}.
+    \end{equation*}
+    %
+    If $O$ is at rest in an inertial frame, then $\dot{\vec{p}}$ equals the total force $\vec{F}$ on the particle, so the above equals the torque $\vec{\Gamma}$. However, if we include in $\vec{F}$ any inertial forces resulting from measuring $\vec{r}$ in a noninertial frame and define the torque from this force, then the above still equals the torque.
+\end{remarkbreak}
+
 
 \section{Angular Momentum for Several Particles}
 

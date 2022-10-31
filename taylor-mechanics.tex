@@ -94,6 +94,9 @@
 % \renewcommand{\vec}{\mathbf}
 \newcommand{\grad}{\nabla}
 
+\usepackage{adforn}
+\newcommand\fleuronbreak{\fancybreak{\textcolor{linkcolor}{\adfhangingflatleafleft}}}
+
 
 \begin{document}
 
@@ -292,5 +295,219 @@ where the operator $\grad_2$ is defined analogously to $\grad_1$. Hence we indee
 \end{align*}
 %
 This is simply wrong as stated, as Taylor's choice of $U$ requires him to apply e.g. $-\grad_1$ to the function $(\vec{r}_1, \vec{r}_2) \mapsto U(\vec{r}_1 - \vec{r}_2)$, and not to $U$ itself.}
+
+
+\addtocounter{chapter}{4}
+\chapter{Mechanics in Noninertial Frames}
+
+\addtocounter{section}{2}
+\section{The Angular Velocity Vector}
+
+\subsection{Isometries}
+
+Let $X$ and $Y$ be normed vector spaces, and let $S \subseteq X$ be a subset. Notice that a (not necessarily linear) map $\phi \colon S \to Y$ is an isometry if
+%
+\begin{equation*}
+    \norm{\phi(\vec{x}) - \phi(\vec{x}')}
+        = \norm{\vec{x} - \vec{x}'}
+\end{equation*}
+%
+for all $\vec{x}, \vec{x}' \in S$.
+
+\begin{lemma}
+    \label{lem:isometry-preserves-inner-product}
+    Let $X,Y$ be normed spaces and $S \subseteq X$, and let $\phi \colon S \to Y$ be a map such that $\phi(\vec{0}) = \vec{0}$. Then $\phi$ is an isometry if and only if
+    %
+    \begin{equation*}
+        \inner{\phi(\vec{x})}{\phi(\vec{x}')}
+            = \inner{\vec{x}}{\vec{x}'}
+    \end{equation*}
+    %
+    for all $\vec{x}, \vec{x}' \in S$.
+\end{lemma}
+
+\begin{proof}
+    The \enquote{if} part is obvious, so we prove the converse. Notice that
+    %
+    \begin{equation*}
+        \norm{\phi(\vec{x})}
+            = \norm{\phi(\vec{x}) - \phi(\vec{0})}
+            = \norm{\vec{x} - \vec{0}}
+            = \norm{\vec{x}}.
+    \end{equation*}
+    %
+    Hence the calculation
+    %
+    \begin{align*}
+        \norm{\phi(\vec{x})}^2 - 2 \inner{\phi(\vec{x})}{\phi(\vec{x}')} + \norm{\phi(\vec{x}')}^2
+            &= \norm{\phi(\vec{x}) - \phi(\vec{x}')}^2 \\
+            &= \norm{\vec{x} - \vec{x}'}^2 \\
+            &= \norm{\vec{x}}^2 - 2 \inner{\vec{x}}{\vec{x}'} + \norm{\vec{x}'}^2
+    \end{align*}
+    %
+    implies that $\inner{\phi(\vec{x})}{\phi(\vec{x}')} = \inner{\vec{x}}{\vec{x}'}$ as desired.
+\end{proof}
+
+\begin{proposition}
+    \label{prop:isometry-characterisation-Euclidean-space}
+    Every isometry $\phi \colon \reals^d \to \reals^d$ is on the form
+    %
+    \begin{equation*}
+        \phi(\vec{x})
+            = A \vec{x} + \vec{b}, \quad \vec{x} \in \reals^d,
+    \end{equation*}
+    %
+    for a unique $d \prod d$ matrix $A$ and vector $\vec{b} \in \reals^d$. Furthermore, $A$ is orthogonal.
+\end{proposition}
+%
+In particular, any isometry that preserves the origin is linear.
+
+\begin{proof}
+    We first show that $\phi(\vec{x}) = \phi_0(\vec{x}) + \vec{b}$ for some $\vec{b} \in \reals^d$, where $\phi_0 \colon \reals^d \to \reals^d$ is an isometry fixing the origin. Simply let $\vec{b} = \phi(\vec{0})$ and $\phi_0(\vec{x}) = \phi(\vec{x}) - \vec{b}$. Then
+    %
+    \begin{equation*}
+        \phi_0(\vec{0})
+            = \phi(\vec{0}) - \vec{b}
+            = \vec{b} - \vec{b}
+            = \vec{0},
+    \end{equation*}
+    %
+    and for $\vec{x}, \vec{y} \in \reals^d$ we have
+    %
+    \begin{equation*}
+        \norm{ \phi_0(\vec{x}) - \phi_0(\vec{y}) }
+            = \norm{ \phi(\vec{x}) - \phi(\vec{y}) }
+            = \norm{\vec{x} - \vec{y}},
+    \end{equation*}
+    %
+    so $\phi_0$ is an isometry.
+
+    Next we show that $\phi_0$ is linear; since it is an isometry, this will imply the existence of an orthogonal matrix $A$ as above. For $\vec{x}, \vec{y}, \vec{z} \in \reals^d$ we have by \cref{lem:isometry-preserves-inner-product}
+    %
+    \begin{align*}
+        \inner{ \phi_0(\vec{x} + \vec{y}) }{ \phi_0(\vec{z}) }
+            &= \inner{ \vec{x} + \vec{y} }{ \vec{z} } \\
+            &= \inner{ \vec{x} }{ \vec{z} } + \inner{ \vec{y} }{ \vec{z} } \\
+            &= \inner{ \phi_0(\vec{x}) }{ \phi_0(\vec{z}) } + \inner{ \phi_0(\vec{y}) }{ \phi_0(\vec{z}) } \\
+            &= \inner{ \phi_0(\vec{x}) + \phi_0(\vec{y}) }{ \phi_0(\vec{z}) }.
+    \end{align*}
+    %
+    Since $\phi_0$ preserves orthogonality, it maps an orthogonal basis into an orthogonal basis. Replacing $\vec{z}$ by the elements in such a basis, it follows that $\inner{ \phi_0(\vec{x} + \vec{y}) }{ \vec{w} } = \inner{ \phi_0(\vec{x}) + \phi_0(\vec{y}) }{ \vec{w} }$ for all $\vec{w} \in \reals^d$. Hence $\phi_0(\vec{x} + \vec{y}) = \phi_0(\vec{x}) + \phi_0(\vec{y})$. We similarly find that, for $\alpha \in \reals$,
+    %
+    \begin{align*}
+        \inner{ \phi_0(\alpha \vec{x}) }{ \phi_0(\vec{z}) }
+            &= \inner{ \alpha \vec{x} }{ \vec{z} } \\
+            &= \alpha \inner{ \vec{x} }{ \vec{z} } \\
+            &= \alpha \inner{ \phi_0(\vec{x}) }{ \phi_0(\vec{z}) } \\
+            &= \inner{ \alpha \phi_0(\vec{x}) }{ \phi_0(\vec{z}) },
+    \end{align*}
+    %
+    implying that $\phi_0(\alpha \vec{x}) = \alpha \phi_0(\vec{x})$ Thus $\phi_0$ is linear.
+
+    To show uniqueness, assume that $A \vec{x} + \vec{b} = \phi(\vec{x}) = A' \vec{x} + \vec{b}'$ for all $\vec{x} \in \reals^d$. Then $\vec{b} = \phi(\vec{0}) = \vec{b}'$, so $A \vec{x} = A' \vec{x}$. Since this holds for all $\vec{x}$, it follows that $A = A'$ as desired.
+\end{proof}
+
+\fleuronbreak
+
+Consider a body in space, and let $S(t) \subseteq \reals^3$ denote the points in the body at time $t$. For each $t$ there is a map $\phi_t \colon S(0) \to S(t)$ mapping each point (or particle) in $S(0)$ to the position it inhabits at time $t$. If the body performs rigid motion, then each $\phi_t$ must be an isometry (indeed, we may take this as part of the definition of rigid motion, along with the transformation preserving orientation). However, to apply \cref{prop:isometry-characterisation-Euclidean-space} to $\phi_t$ it must be defined on $\reals^3$. A natural question is then whether it is possible to extend an isometry from a subset of $\reals^3$ to all $\reals^3$. The answer is affirmative:
+
+\begin{lemma}
+    Let $S \subseteq \reals^d$ and let $\phi \colon S \to \reals^d$ be an isometry. Then $\phi$ extends to an isometry $\tilde\phi \colon \reals^d \to \reals^d$.
+\end{lemma}
+
+\newcommand{\Span}{\operatorname{span}}
+
+\begin{proof}
+    By translation we may assume that $\phi(\vec{0}) = \vec{0}$. First extend $\phi$ by linearity to $\Span S$. This is well-defined, since if $\vec{x}_1, \ldots, \vec{x}_n \in S$ and $\alpha_1, \ldots, \alpha_n \in \reals$, then by \cref{lem:isometry-preserves-inner-product} we have
+    %
+    \begin{equation*}
+        \norm[\bigg]{ \sum_{i=1}^n \alpha_i \phi(\vec{x}_i) }^2
+            = \sum_{i,j=1}^n \alpha_i \alpha_j \inner{\phi(\vec{x}_i)}{\phi(\vec{x}_j)}
+            = \sum_{i,j=1}^n \alpha_i \alpha_j \inner{\vec{x}_i}{\vec{x}_j}
+            = \norm[\bigg]{ \sum_{i=1}^n \alpha_i \vec{x}_i }^2.
+    \end{equation*}
+    %
+    This also shows that $\phi$ extends to an isometry on $\Span S$, and in particular $\phi$ is linear by \cref{prop:isometry-characterisation-Euclidean-space}.
+
+    Since $\phi$ is linear it maps $\Span S$ to a subspace $\phi(\Span S)$ of $\reals^d$ with the same dimension. Let $U$ and $V$ be the orthogonal complements of $\Span S$ and $\phi(\Span S)$ respectively, and let $\psi \colon U \to V$ be an isometry. Letting $\tilde{\phi} = \phi \oplus \psi$, it follows easily by Pythagoras' theorem that $\tilde{\phi}$ is also an isometry as desired.
+\end{proof}
+
+Next we consider the case where the motion of the body is such that some point is fixed. By choosing coordinates we may assume that this point is the origin, so the motion is given by a linear transformation. Furthermore, for such a motion to be rigid it cannot be a reflection, so we require that it has determinant $1$. In this case the motion turns out to be a \emph{rotation}, i.e. there is an orthonormal basis of $\reals^3$ with respect to which the transformation has the matrix
+%
+\begin{equation}
+    \label{eq:rotation-matrix}
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & a & -b \\
+        0 & b & a
+    \end{pmatrix}
+\end{equation}
+%
+for appropriate $a,b \in \reals$ such that $a^2 + b^2 = 1$. That is, $a = \cos\theta$ and $b = \sin\theta$ for some \emph{angle of rotation} $\theta \in [0, 2\pi)$. The span of an eigenvector corresponding to the eigenvalue $1$ is called an \emph{axis of rotation}.
+
+\begin{theorem}[Euler's Theorem]
+    Let $\phi \colon \reals^3 \to \reals^3$ be an isometry fixing the origin with determinant $1$. Then $\phi$ is a rotation. If $\phi$ is nontrivial, then it has a unique axis of rotation and a unique angle of rotation.
+\end{theorem}
+
+\begin{proof}
+    First we show that $\phi$ has $1$ as an eigenvalue. Let $p_\phi(t) = \det(tI - \phi)$ be its characteristic polynomial. The leading term of $p_\phi$ is then $t^3$, so $p_\phi(t) \to \infty$ as $t \to \infty$. On the other hand $p_\phi(0) = -\det\phi = -1$, so $p_\phi$ has a zero on the positive real axis, i.e. $\phi$ has a positive eigenvalue. But this must be $1$ since $\phi$ is an isometry.
+
+    Choose an orthonormal basis for $\reals^3$ whose first element is an eigenvector corresponding to the eigenvalue $1$. Since the matrix of $\phi$ is in this basis is orthogonal, it is precisely on the form \cref{eq:rotation-matrix}, proving the first claim.
+
+    For the uniqueness claims, assume that $\phi$ is nontrivial. Since $\phi$ is orthogonal it is normal, so it has three (complex) eigenvalues, counted with multiplicity. If two eigenvalues are $1$, then the third must also be since $\det\phi = 1$. But then $\phi$ would be trivial, so this is impossible. Hence the eigenspace corresponding to the eigenvalue $1$ is one-dimensional, so $\phi$ has a unique axis of rotation.
+
+    [TODO uniqueness of angle?]
+\end{proof}
+
+
+\subsection{Time derivatives of rotating vectors}
+
+Assume that the body rotates with constant angular velocity $\vec{\omega}$. By changing coordinates we may assume that $\vec{\omega}$ is parallel to the $x$-axis. The corresponding rotation matrix is then
+%
+\begin{equation*}
+    R(t) =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & \cos \omega t & -\sin \omega t \\
+        0 & \sin \omega t & \cos \omega t
+    \end{pmatrix}.
+\end{equation*}
+%
+If $\vec{r}_0 = (r_1, r_2, r_3)$ is any vector \enquote{fixed} in the rotating body, then at time $t$ it will have rotated into the vector $\vec{r}(t) = R(t) \vec{r}_0$. We claim that $\dot{\vec{r}}(t) = \vec{\omega} \prod \vec{r}(t)$. To see this, we simply calculate each side. First of all we have
+%
+\begin{equation*}
+    \dot{\vec{r}}(t)
+        = \dot{R}(t) \vec{r}_0
+        = -\omega \begin{pmatrix}
+            0 & 0 & 0 \\
+            0 & \sin \omega t & \cos \omega t \\
+            0 & -\cos \omega t & \sin \omega t
+        \end{pmatrix} \vec{r}_0
+        = -\omega \begin{pmatrix}
+            0 \\
+            r_2 \sin \omega t + r_3 \cos \omega t \\
+            -r_2 \cos \omega t + r_3 \sin \omega t
+        \end{pmatrix}.
+\end{equation*}
+%
+Next, since $\vec{\omega} = (\omega,0,0)$ in our chosen coordinates, we have
+%
+\begin{equation*}
+    \vec{\omega} \prod \vec{r}(t)
+        = \vec{\omega} \prod R(t) \vec{r}_0
+        = \vec{\omega} \prod \begin{pmatrix}
+            r_1 \\
+            r_2 \cos \omega t - r_3 \sin \omega t \\
+            r_2 \sin \omega t + r_3 \cos \omega t
+        \end{pmatrix}
+        = \omega \begin{pmatrix}
+            0 \\
+            - r_2 \sin \omega t - r_3 \cos \omega t \\
+            r_2 \cos \omega t - r_3 \sin \omega t
+        \end{pmatrix}.
+\end{equation*}
+%
+The claim thus follows.
+
 
 \end{document}

@@ -510,4 +510,20 @@ Next, since $\vec{\omega} = (\omega,0,0)$ in our chosen coordinates, we have
 The claim thus follows.
 
 
+\section{Time Derivatives in a Rotating Frame}
+
+\newcommand{\calS}{\mathcal{S}}
+
+Let $\calS_0$ be an inertial frame and $\calS$ a noninertial frame with the same origin. Assume that $\calS$ is rotating around its origin with angular velocity $\vec{\Omega}$, and let $R(t)$ be the corresponding family of rotation matrices. That is, if $\vec{x}$ is a vector that is fixed in $\calS$, then measured from $\calS_0$ it is $R(t) \vec{x}$.
+
+Let $\calE = (\vec{e}_1, \vec{e}_2, \vec{e}_3)$ be an orthonormal basis; we think of these vectors as fixed in $\calS_0$. Furthermore let $\vec{e}_i'(t) = R(t)\inv \vec{e}_i$, so that $\calE'(t) = (\vec{e}_1'(t), \vec{e}_2'(t), \vec{e}_3'(t))$ is an orthonormal basis for each $t$, fixed in $\calS$. Hence if $\vec{x} = (x_1, x_2, x_3)$ is a coordinate vector with respect to $\calE$, we have
+%
+\begin{equation*}
+    R(t)\inv \vec{x} = \sum_{i=1}^3 x_i R(t)\inv \vec{e}_i
+        = \sum_{i=1}^3 x_i R(t)\inv \vec{e}_i
+\end{equation*}
+
+That is, we consider a time-dependent orthonormal basis $(\vec{e}_1(t), \vec{e}_2(t), \vec{e}_3(t))$ that is at rest in $\calS$. If $\vec{x}(t)$ is a time-dependent vector as measured in $\calS_0$, we denote by $\vec{x}'(t)$ the same vector as measured in $\calS$, i.e. the coordinate vector of $\vec{x}(t)$ with respect to $(\vec{e}_1(t), \vec{e}_2(t), \vec{e}_3(t))$.
+
+
 \end{document}
